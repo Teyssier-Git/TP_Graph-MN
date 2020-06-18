@@ -137,7 +137,7 @@ void init_couleur_arc (pgraphe_t g)
       }
       p = p->sommet_suivant ; // passer au sommet suivant dans le graphe
     }
-  
+
   return ;
 }
 
@@ -471,14 +471,14 @@ int regulier (pgraphe_t g)
 */
 
 int elementaire(pgraphe_t g, pchemin_t c){
-  
+
   init_couleur_sommet(g);
-  
+
   psommet_t sommetCourant = c->start;
   pchemin_t cheminRestant;
 
   cheminRestant = c;
-  
+
   while(cheminRestant != NULL){
   	sommetCourant = cheminRestant->start;
   	if(sommetCourant->couleur == 1) {return 0;}
@@ -490,14 +490,14 @@ int elementaire(pgraphe_t g, pchemin_t c){
 }
 
 int simple(pgraphe_t g, pchemin_t c){
-  
+
   init_couleur_arc(g);
-  
+
   parc_t arcCourant = c->arc;
   pchemin_t cheminRestant;
 
   cheminRestant = c;
-  
+
   while(cheminRestant != NULL){
   	arcCourant = cheminRestant->arc;
   	if(arcCourant->couleur == 1) {return 0;}
@@ -512,18 +512,18 @@ int hamiltonien(pgraphe_t g, pchemin_t c){
 
   init_couleur_sommet(g);
   pchemin_t cheminRestant = c;
-    
+
   while(cheminRestant != NULL){
 	cheminRestant -> start -> couleur = 8;
 	cheminRestant = cheminRestant->suite;
-  }	
-  
+  }
+
   psommet_t sommetCourant = g;
   while(sommetCourant != NULL){
   	if(sommetCourant->couleur != 8) {return 0;}
   	sommetCourant = sommetCourant->sommet_suivant;
   }
-  
+
   return 1;
 }
 
@@ -531,12 +531,12 @@ int eulerien(pgraphe_t g, pchemin_t c){
 
   init_couleur_arc(g);
   pchemin_t cheminRestant = c;
-    
+
   while(cheminRestant != NULL){
 	cheminRestant -> arc -> couleur = 5;
 	cheminRestant = cheminRestant->suite;
-  }	
-  
+  }
+
   psommet_t sommetCourant = g;
   parc_t arcCourant;
 
@@ -551,6 +551,88 @@ int eulerien(pgraphe_t g, pchemin_t c){
     }
   return 1;
 }
+
+/*
+void ajoutQueueChemin (pchemin_t chemin, pchemin_t nouveau) {
+    if (chemin == NULL) {
+        chemin = nouveau;
+    } else {
+        pchemin_t cur;
+        for (cur = chemin; cur->suite != NULL; cur = cur->suite) {
+        }
+
+        cur->suite = nouveau;
+    }
+}
+
+void detruireQueueChemin (pchemin_t chemin) {
+    if (chemin == NULL) {
+        return;
+    }
+
+    if (chemin->suite == NULL) {
+        free(chemin->suite);
+        chemin = NULL;
+        return;
+    }
+
+    pchemin_t cur;
+    for (cur = chemin; cur->suite->suite != NULL; cur = cur->suite) {
+    }
+
+    free(cur->suite);
+    cur->suite = NULL;
+
+}
+
+int tailleChemins(pchemin_t c) {
+    pchemin_t cur = c;
+    int i = 0;
+    while (cur != NULL) {
+        cur = cur->suite;
+        i++;
+    }
+    return i;
+}
+
+int traitement_eulerien(pgraphe_t g, psommet_t actuel, pchemin_t chemin, int n) {
+    printf("AHHAH\n");
+    if (eulerien(g,chemin)) {
+        return 1;
+    }
+    if (tailleChemins(chemin) >= n) {
+        return 0;
+    }
+
+    for (parc_t cur = g->liste_arcs; cur != NULL; cur = cur->arc_suivant) {
+        pchemin_t nouv = (pchemin_t)malloc(sizeof(chemin_t));
+        nouv->start = actuel;
+        nouv->arc = cur;
+        nouv->suite = NULL;
+        ajoutQueueChemin(chemin, nouv);
+        if (traitement_eulerien(g,cur->dest, chemin, n)) {
+            return 1;
+        }
+        detruireQueueChemin(chemin);
+    }
+    return 0;
+}
+
+int graphe_eulerien (pgraphe_t g){
+    for (psommet_t cur = g; cur != NULL; cur = cur->sommet_suivant) {
+        cur->couleur = RED;
+    }
+
+    int n = nombre_arcs(g);
+
+    for (psommet_t cur = g; cur != NULL; cur = cur->sommet_suivant) {
+        pchemin_t chemin = NULL;
+        if (traitement_eulerien(g, g, chemin, n)) {
+            return 1;
+        }
+    }
+    return 0;
+}*/
 
 int distance(pgraphe_t g, int x, int y){
     pgraphe_t gX = NULL, gY = NULL;

@@ -31,7 +31,7 @@ typedef struct s
 
 typedef struct a {
 
-                  int         poids ; // poids de l arc                  
+                  int         poids ; // poids de l arc
                   int	       couleur;
                   psommet_t   dest ;  // pointeur sommet destinataire
                   struct a *  arc_suivant ; // arc suivant
@@ -44,7 +44,7 @@ typedef struct c {
 		  psommet_t start;
 		  parc_t arc;
 		  struct c * suite;
-		
+
 } chemin_t, *pchemin_t;
 
 /*
@@ -88,6 +88,8 @@ int simple(pgraphe_t g, pchemin_t c);
 int hamiltonien(pgraphe_t g, pchemin_t c);
 
 int eulerien(pgraphe_t g, pchemin_t c);
+
+int graphe_eulerien (pgraphe_t g);
 
 int distance(pgraphe_t g, int x, int y);
 

@@ -42,7 +42,7 @@
     }
 
     printf("\n");
-    return chem; 
+    return chem;
 }*/
 
 int main (int argc, char **argv)
@@ -99,7 +99,9 @@ int main (int argc, char **argv)
   //testChem = constructeurChemins(tab1,5);
   //printf("Elementaire : %d\n", elementaire(g,testChem));
 
-  printf("\n=== test eulerien ===\n\n");
+  // printf("\n=== test graphe_eulerien ===\n\n");
+  //
+  // printf("Ce graphe %s Eulerien\n", (graphe_eulerien(g) ? "est" : "n'est pas"));
 
   printf("\n=== test distance ===\n\n");
   int x,y;
