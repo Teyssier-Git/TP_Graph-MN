@@ -80,10 +80,14 @@ int main (int argc, char **argv)
   ecrire_graphe_colorie (g) ;
 
   printf("\n=== test algo_dijkstra ===\n\n");
+  printed();
   int n;
+  printf("Calcul de distance du sommet %d au : ", g->label);
   scanf("%d", &n);
 
   algo_dijkstra(g,n);
+
+  notPrinted();
 
   printf("\n=== test elementaire ===\n\n");
 
@@ -107,11 +111,12 @@ int main (int argc, char **argv)
   printf("Distance entre %d et %d = %d\n", x, y, res);
 
   printf("\n=== test excentricite ==\n\n");
+  printf("Calcul de excentricite du sommet : ");
   scanf("%d", &n);
   int exc = excentricite(g,n);
   printf("Excentricite de %d = %d\n", n, exc);
 
   printf("\n=== test diametre ==\n\n");
   int dia = diametre(g);
-  printf("Diametre = %d\n", dia);
+  printf("Diametre du graphe : %d\n", dia);
 }

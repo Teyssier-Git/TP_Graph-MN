@@ -14,6 +14,15 @@
 #include "file.h"
 #include "pile.h"
 
+int print = 0;
+
+void printed() {
+    print = 1;
+}
+
+void notPrinted() {
+    print = 0;
+}
 
 psommet_t chercher_sommet (pgraphe_t g, int label)
 {
@@ -314,7 +323,9 @@ int algo_dijkstra (pgraphe_t g, int r) {
 
     // init, all infinity exept g
     if (g == NULL) {
-        // printf("Le graphe g est NULL\n");
+        if (print) {
+                printf("Le graphe g est NULL\n");
+        }
         return -1;
     }
     g->chemins = NULL;
@@ -343,17 +354,21 @@ int algo_dijkstra (pgraphe_t g, int r) {
     if (destination != NULL) {
         parc_t act = destination->chemins;
 
-        printf(" %d |", g->label);
-        while (act != NULL) {
-            // char c;
-            // scanf("%c",&c);
-            printf(" %d |", act->dest->label);
-            act = act->arc_suivant;
+        if (print) {
+            printf(" %d |", g->label);
+            while (act != NULL) {
+                // char c;
+                // scanf("%c",&c);
+                printf(" %d |", act->dest->label);
+                act = act->arc_suivant;
+            }
+            printf("\nPoids = %d\n", destination->poids);
         }
-        printf("\nPoids = %d\n", destination->poids);
         return destination->poids;
     }
-    printf("Pas de chemins disponibles, sommet inexistant ou inateignable\n");
+    if (print) {
+        printf("Pas de chemins disponibles, sommet inexistant ou inateignable\n");
+    }
     return -1;
 }
 
@@ -559,7 +574,9 @@ int distance(pgraphe_t g, int x, int y){
     }
 
     if (gX == NULL || gY == NULL) {
-        // printf("Label %d ou %d n'existent pas\n", x, y);
+        if (print) {
+            printf("Label %d ou %d n'existent pas\n", x, y);
+        }
         return -1;
     }
 

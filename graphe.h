@@ -43,6 +43,10 @@ typedef struct a {
 
 typedef psommet_t pgraphe_t ;
 
+void printed();
+
+void notPrinted();
+
 psommet_t chercher_sommet (pgraphe_t g, int label) ;
 
 void ajouter_arc (psommet_t o, psommet_t d, int distance) ;
