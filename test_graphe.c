@@ -3,6 +3,8 @@
 
 #include "graphe.h"
 #include "fap.h"
+#include "pile.h"
+#include "file.h"
 
 /**
  * Construit un chemin avec des sommets de ayant comme label le tableau d'entier

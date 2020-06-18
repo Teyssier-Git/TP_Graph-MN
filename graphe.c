@@ -11,6 +11,8 @@
 
 #include "graphe.h"
 #include "fap.h"
+#include "file.h"
+#include "pile.h"
 
 
 psommet_t chercher_sommet (pgraphe_t g, int label)
@@ -171,21 +173,67 @@ int colorier_graphe (pgraphe_t g)
 
 void afficher_graphe_largeur (pgraphe_t g, int r)
 {
-  /*
-    afficher les sommets du graphe avec un parcours en largeur
-  */
+    /*
+      afficher les sommets du graphe avec un parcours en largeur
+    */
 
-  return ;
+    init_couleur_sommet(g);
+
+    pfile_t sommets_A_Explorer = creer_file();
+    psommet_t sommetCourant;
+    psommet_t voisinCourant;
+    parc_t arcCourant;
+
+    g->couleur = 1;
+    enfiler(sommets_A_Explorer, g);
+
+    while(!file_vide(sommets_A_Explorer)){
+    	sommetCourant = defiler(sommets_A_Explorer);
+    	printf("%d | ", sommetCourant->label);
+    	arcCourant = sommetCourant->liste_arcs;
+    	while(arcCourant != NULL){
+    		voisinCourant = arcCourant->dest;
+    		if(voisinCourant->couleur == 0){
+    			voisinCourant->couleur = 1;
+    			enfiler(sommets_A_Explorer, voisinCourant);
+    		}
+    		arcCourant = arcCourant->arc_suivant;
+    	}
+    }
+
+    return ;
 }
 
 
 void afficher_graphe_profondeur (pgraphe_t g, int r)
 {
-  /*
-    afficher les sommets du graphe avec un parcours en profondeur
-  */
+    /*
+      afficher les sommets du graphe avec un parcours en profondeur
+    */
+    init_couleur_sommet(g);
 
-  return ;
+    ppile_t sommets_A_Explorer = creer_pile();
+    psommet_t sommetCourant;
+    psommet_t voisinCourant;
+    parc_t arcCourant;
+
+    g->couleur = 1;
+    empiler(sommets_A_Explorer, g);
+
+    while(!pile_vide(sommets_A_Explorer)){
+    	sommetCourant = depiler(sommets_A_Explorer);
+    	printf("%d | ", sommetCourant->label);
+    	arcCourant = sommetCourant->liste_arcs;
+    	while(arcCourant != NULL){
+    		voisinCourant = arcCourant->dest;
+    		if(voisinCourant->couleur == 0){
+    			voisinCourant->couleur = 1;
+    			empiler(sommets_A_Explorer, voisinCourant);
+    		}
+    		arcCourant = arcCourant->arc_suivant;
+    	}
+    }
+    return ;
 }
 
 void ajouter_chemin_queue(psommet_t s, parc_t ajout) {
