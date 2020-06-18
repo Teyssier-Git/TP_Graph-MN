@@ -11,8 +11,8 @@
  * fournis
  * Effet de bord : affiche le chemin créé
 */
-chemin_t constructeurChemins(int tab[], int taille) {
-    if (taille == 0) {
+/* chemin_t constructeurChemins(int tab[], int taille) {
+   if (taille == 0) {
         return NULL;
     }
 
@@ -42,8 +42,8 @@ chemin_t constructeurChemins(int tab[], int taille) {
     }
 
     printf("\n");
-    return chem;
-}
+    return chem; 
+}*/
 
 int main (int argc, char **argv)
 {
@@ -87,13 +87,13 @@ int main (int argc, char **argv)
 
   printf("\n=== test elementaire ===\n\n");
 
-  int tab[5] = {0,1,2,3,4};
-  chemin_t testChem = constructeurChemins(tab,5);
-  printf("Elementaire : %d\n", elementaire(g,testChem));
+  //int tab[5] = {0,1,2,3,4};
+  //chemin_t testChem = constructeurChemins(tab,5);
+  //printf("Elementaire : %d\n", elementaire(g,testChem));
 
-  int tab1[5] = {0,4,2,3,4};
-  testChem = constructeurChemins(tab1,5);
-  printf("Elementaire : %d\n", elementaire(g,testChem));
+  //int tab1[5] = {0,4,2,3,4};
+  //testChem = constructeurChemins(tab1,5);
+  //printf("Elementaire : %d\n", elementaire(g,testChem));
 
   printf("\n=== test eulerien ===\n\n");
 
